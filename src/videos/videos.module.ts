@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { VideosController } from './videos.controller';
-import { VideosService } from './videos.service';
+import { VideosController } from './controllers/videos.controller';
+import { VideosService } from './services/videos.service';
 
 @Module({
   controllers: [VideosController],
