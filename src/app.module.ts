@@ -1,8 +1,12 @@
 import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { VideosModule } from './videos/videos.module';
 
 @Module({
-  imports: [VideosModule],
+  imports: [
+    TypeOrmModule.forRoot(),
+    VideosModule
+  ],
   controllers: [],
   providers: [],
 })

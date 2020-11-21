@@ -1,0 +1,14 @@
+{
+  "name": "default",
+  "type": "postgres",
+  "host": "localhost",
+  "port": 5432,
+  "username": "postgres",
+  "password": "docker",
+  "database": "yt_crud",
+  "entities": ["src/**/*.entity{.ts,.js}"],
+  "migrations": ["src/shared/database/migrations/*{.ts,.js}"],
+  "cli": {
+    "migrationsDir": "src/shared/database/migrations"
+  }
+}
