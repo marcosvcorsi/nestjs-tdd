@@ -6,8 +6,8 @@
   "username": "postgres",
   "password": "docker",
   "database": "yt_crud",
-  "entities": ["src/**/*.entity{.ts,.js}"],
-  "migrations": ["src/shared/database/migrations/*{.ts,.js}"],
+  "entities": ["dist/**/*.entity.js"],
+  "migrations": ["dist/shared/database/migrations/*.js"],
   "cli": {
     "migrationsDir": "src/shared/database/migrations"
   }
