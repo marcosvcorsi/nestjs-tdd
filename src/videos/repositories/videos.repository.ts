@@ -1,16 +1,14 @@
 import { Injectable } from "@nestjs/common";
-import { getRepository, Repository } from "typeorm";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Repository } from "typeorm";
 import { CreateVideoDto } from "../dtos/create-video.dto";
 import { UpdateVideoDto } from "../dtos/update-video.dto";
 import { Video } from "../entities/video.entity";
 
 @Injectable()
 export class VideosRepository {
-  private readonly repository: Repository<Video>;
 
-  constructor() {
-    this.repository = getRepository(Video);
-  }
+  constructor(@InjectRepository(Video) private readonly repository: Repository<Video>) {}
 
   async findAll(): Promise<Video[]> {
     return this.repository.find();
