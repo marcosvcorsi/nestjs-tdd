@@ -44,7 +44,7 @@ describe('Videos', () => {
     await app.close();
   })
 
-  it('/POST videos', async () => {
+  test('/POST videos', async () => {
     const response = await request(app.getHttpServer()).post('/videos').send({
       title: 'anytitle',
       url: 'anyurl'
