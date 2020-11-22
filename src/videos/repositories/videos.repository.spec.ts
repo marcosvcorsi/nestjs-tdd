@@ -9,7 +9,7 @@ describe('Videos Repository', () => {
   let ormMock: Repository<Video>;
 
   beforeEach(async () => {
-    const mockRepository = {
+    const mockOrmRepository = {
       create: jest.fn(),
       save: jest.fn(),
       find: jest.fn(),
@@ -21,7 +21,7 @@ describe('Videos Repository', () => {
         VideosRepository,
         {
           provide: getRepositoryToken(Video),
-          useValue: mockRepository
+          useValue: mockOrmRepository
         }
       ],
     }).compile();
