@@ -13,7 +13,9 @@ describe('Videos Repository', () => {
       create: jest.fn(),
       save: jest.fn(),
       find: jest.fn(),
-      findOne: jest.fn()
+      findOne: jest.fn(),
+      update: jest.fn(),
+      delete: jest.fn()
     }
 
     const moduleRef = await Test.createTestingModule({
@@ -84,6 +86,31 @@ describe('Videos Repository', () => {
       const response = await repository.findById('anyid');
 
       expect(response).toEqual(mockReturn);
+    })
+  })
+
+  describe('update()', () => {
+    it('should call OrmRepository update with correct values', async () => {
+      const mockParam = {
+        title: 'anytitle',
+        url: 'anyurl'
+      }
+      
+      const updateSpy = jest.spyOn(ormMock, 'update');
+
+      await repository.update('anyid', mockParam);
+
+      expect(updateSpy).toHaveBeenCalledWith('anyid', mockParam);
+    })
+  })
+
+  describe('delete()', () => {
+    it('should call OrmRepository delete with correct value', async () => {
+      const deleteSpy = jest.spyOn(ormMock, 'delete');
+
+      await repository.delete('anyid');
+
+      expect(deleteSpy).toHaveBeenCalledWith('anyid');
     })
   })
 })
