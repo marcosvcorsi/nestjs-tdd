@@ -12,7 +12,8 @@ describe('Videos Repository', () => {
     const mockRepository = {
       create: jest.fn(),
       save: jest.fn(),
-      find: jest.fn()
+      find: jest.fn(),
+      findOne: jest.fn()
     }
 
     const moduleRef = await Test.createTestingModule({
@@ -63,6 +64,24 @@ describe('Videos Repository', () => {
       jest.spyOn(ormMock, 'find').mockResolvedValueOnce(mockReturn);
 
       const response = await repository.findAll();
+
+      expect(response).toEqual(mockReturn);
+    })
+  })
+
+  describe('findById()', () => {
+    it('should return a video', async () => {
+      const mockReturn = {
+        id: 'anyid',
+        title: 'anytitle',
+        url: 'anyurl',
+        created_at: new Date(),
+        updated_at: new Date(),
+      }
+
+      jest.spyOn(ormMock, 'findOne').mockResolvedValueOnce(mockReturn);
+
+      const response = await repository.findById('anyid');
 
       expect(response).toEqual(mockReturn);
     })
