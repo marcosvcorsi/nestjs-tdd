@@ -42,5 +42,37 @@ describe('VideosService', () => {
 
       expect(createSpy).toHaveBeenCalledWith(mockParam);
     })
+
+    it('should throw if VideosRepository create throws', async () => {
+      jest.spyOn(repository, 'create').mockRejectedValueOnce(new Error());
+
+      const mockParam = {
+        title: 'anytitle',
+        url: 'anyurl'
+      }
+
+      await expect(service.create(mockParam)).rejects.toThrow(new Error());
+    })
+
+    it('should return a video on success', async () => {
+      const mockReturn = {
+        id: 'anyid',
+        title: 'anytitle',
+        url: 'anyurl',
+        created_at: new Date(),
+        updated_at: new Date()
+      }
+
+      jest.spyOn(repository, 'create').mockResolvedValueOnce(mockReturn);
+
+      const mockParam = {
+        title: 'anytitle',
+        url: 'anyurl'
+      }
+
+      const response = await service.create(mockParam);
+
+      expect(response).toEqual(mockReturn);
+    })
   })
 });
