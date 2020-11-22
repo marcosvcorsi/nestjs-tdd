@@ -13,8 +13,6 @@ export class VideosService {
   }
 
   async findAll(): Promise<Video[]> {
-    await this.videosRepository.findAll();
-
-    return Promise.resolve([]);
+    return this.videosRepository.findAll();
   }
 }
