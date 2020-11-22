@@ -85,5 +85,11 @@ describe('VideosService', () => {
 
       expect(findSpy).toHaveBeenCalled();
     })
+
+    it('should throw if VideosRepository find all throws', async () => {
+      jest.spyOn(repository, 'findAll').mockRejectedValueOnce(new Error());
+
+      await expect(service.findAll()).rejects.toThrow(new Error())
+    })
   })
 });
