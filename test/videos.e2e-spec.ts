@@ -4,11 +4,12 @@ import { Test } from "@nestjs/testing"
 import { VideosModule } from "../src/videos/videos.module"
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Video } from '../src/videos/entities/video.entity';
-import { getRepository } from 'typeorm';
+import { getRepository, Repository } from 'typeorm';
 import { ConfigModule } from '@nestjs/config';
 
 describe('Videos', () => {
   let app:INestApplication;
+  let repository: Repository<Video>
 
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({
@@ -30,17 +31,17 @@ describe('Videos', () => {
       ]
     }).compile();
 
+    repository = getRepository(Video);
+
     app = moduleRef.createNestApplication();
     await app.init();
   })
 
   beforeEach(async () => {
-    await getRepository(Video).delete({});
+    await repository.delete({});
   })
 
   afterAll(async () => {
-    await getRepository(Video).delete({});
-
     await app.close();
   })
 
@@ -54,5 +55,21 @@ describe('Videos', () => {
     expect(response.body.id).toBeTruthy();
     expect(response.body.title).toBe('anytitle');
     expect(response.body.url).toBe('anyurl')
+  })
+
+  test('/GET videos', async () => {
+    const video = repository.create({
+      title: 'anytitle',
+      url: 'anyurl'
+    })
+
+    await repository.save(video);
+
+    const response = await request(app.getHttpServer()).get('/videos');
+
+    expect(response.status).toBe(200);
+    expect(response.body).toHaveLength(1);
+    expect(response.body[0].title).toBe('anytitle');
+    expect(response.body[0].url).toBe('anyurl');
   })
 })
