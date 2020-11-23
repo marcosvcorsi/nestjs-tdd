@@ -91,5 +91,23 @@ describe('VideosController', () => {
 
       await expect(controller.findAll()).rejects.toThrow(new Error());
     })
+
+    it('should return videos on success', async () => {
+      const mockReturn = [
+        {
+          id: 'anyid',
+          title: 'anytitle',
+          url: 'anyurl',
+          created_at: new Date(),
+          updated_at: new Date()
+        }
+      ]
+
+      jest.spyOn(service, 'findAll').mockResolvedValueOnce(mockReturn);
+
+      const response = await controller.findAll();
+
+      expect(response).toEqual(mockReturn)
+    })
   })
 });
