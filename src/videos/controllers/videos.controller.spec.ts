@@ -8,7 +8,8 @@ describe('VideosController', () => {
 
   beforeEach(async () => {
     const mockService = {
-      create: jest.fn()
+      create: jest.fn(),
+      findAll: jest.fn()
     }
 
     const module: TestingModule = await Test.createTestingModule({
@@ -73,6 +74,16 @@ describe('VideosController', () => {
       const response = await controller.create(mockParam)
 
       expect(response).toEqual(mockReturn);
+    })
+  })
+
+  describe('findAll()', () => {
+    it('should call VideosService find all', async () => {
+      const findSpy = jest.spyOn(service, 'findAll');
+
+      await controller.findAll();
+
+      expect(findSpy).toHaveBeenCalled()
     })
   })
 });
