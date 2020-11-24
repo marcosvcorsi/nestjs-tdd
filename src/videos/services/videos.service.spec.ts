@@ -127,6 +127,22 @@ describe('VideosService', () => {
 
       await expect(service.findById('anyid')).rejects.toThrow(new Error());
     })
+
+    it('should return a video on success', async () => {
+      const mockReturn = {
+        id: 'anyid',
+        title: 'anytitle',
+        url: 'anyurl',
+        created_at: new Date(),
+        updated_at: new Date()
+      }
+
+      jest.spyOn(repository, 'findById').mockResolvedValueOnce(mockReturn)
+
+      const response = await service.findById('anyid');
+
+      expect(response).toEqual(mockReturn);
+    })
   })
 
   describe('update()', () => {
