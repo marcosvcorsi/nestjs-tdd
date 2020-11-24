@@ -9,7 +9,8 @@ describe('VideosService', () => {
   beforeEach(async () => {
     const mockRepository = {
       create: jest.fn(),
-      findAll: jest.fn()
+      findAll: jest.fn(),
+      update: jest.fn()
     }
 
     const module: TestingModule = await Test.createTestingModule({
@@ -108,6 +109,21 @@ describe('VideosService', () => {
       const response = await service.findAll();
 
       expect(response).toEqual(mockReturn);
+    })
+  })
+
+  describe('update()', () => {
+    it('should call VideosRepository update with correct values', async () => {
+      const updateSpy = jest.spyOn(repository, 'update');
+      
+      const mockParam = {
+        title: 'anytitle',
+        url: 'anyurl'
+      }
+
+      await service.update('anyid', mockParam);
+
+      expect(updateSpy).toHaveBeenCalledWith('anyid', mockParam);
     })
   })
 });
