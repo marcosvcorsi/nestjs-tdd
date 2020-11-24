@@ -10,7 +10,8 @@ describe('VideosService', () => {
     const mockRepository = {
       create: jest.fn(),
       findAll: jest.fn(),
-      update: jest.fn()
+      update: jest.fn(),
+      findById: jest.fn()
     }
 
     const module: TestingModule = await Test.createTestingModule({
@@ -109,6 +110,16 @@ describe('VideosService', () => {
       const response = await service.findAll();
 
       expect(response).toEqual(mockReturn);
+    })
+  })
+
+  describe('findById()', () => {
+    it('should call VideosRepository find by id with correct value', async () => {
+      const findSpy = jest.spyOn(repository, 'findById');
+
+      await service.findById('anyid');
+
+      expect(findSpy).toHaveBeenCalledWith('anyid');
     })
   })
 
