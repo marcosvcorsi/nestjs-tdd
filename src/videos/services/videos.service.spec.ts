@@ -125,5 +125,16 @@ describe('VideosService', () => {
 
       expect(updateSpy).toHaveBeenCalledWith('anyid', mockParam);
     })
+
+    it('should throw if VideosRepository throws', async () => {
+      jest.spyOn(repository, 'update').mockRejectedValueOnce(new Error());
+
+      const mockParam = {
+        title: 'anytitle',
+        url: 'anyurl'
+      }
+
+      await expect(service.update('anyid', mockParam)).rejects.toThrow(new Error());
+    })
   })
 });
