@@ -121,6 +121,12 @@ describe('VideosService', () => {
 
       expect(findSpy).toHaveBeenCalledWith('anyid');
     })
+
+    it('should throw if VideosRepository find by id throws', async () => {
+      jest.spyOn(repository, 'findById').mockRejectedValueOnce(new Error());
+
+      await expect(service.findById('anyid')).rejects.toThrow(new Error());
+    })
   })
 
   describe('update()', () => {
