@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Get, HttpCode, HttpStatus, Param, Post, Put } from '@nestjs/common';
 import { CreateVideoDto } from '../dtos/create-video.dto';
 import { UpdateVideoDto } from '../dtos/update-video.dto';
 import { Video } from '../entities/video.entity';
@@ -20,6 +20,7 @@ export class VideosController {
   }
 
   @Put(':id')
+  @HttpCode(HttpStatus.NO_CONTENT)
   async update(@Param('id') id: string, @Body() updateVideoDto: UpdateVideoDto): Promise<void> {
     return this.videosService.update(id, updateVideoDto);
   }
