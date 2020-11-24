@@ -17,6 +17,10 @@ export class VideosService {
     return this.videosRepository.findAll();
   }
 
+  async findById(id: string): Promise<Video | null> {
+    return this.videosRepository.findById(id);
+  }
+
   async update(id: string, updateVideoDto: UpdateVideoDto): Promise<void> {
     return this.videosRepository.update(id, updateVideoDto);
   }
