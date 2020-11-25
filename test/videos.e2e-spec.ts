@@ -73,7 +73,22 @@ describe('Videos', () => {
     expect(response.body[0].url).toBe('anyurl');
   })
 
-  test('/PUT videos', async () => {
+  test('/GET/:id videos', async () => {
+    const video = repository.create({
+      title: 'anytitle',
+      url: 'anyurl'
+    })
+
+    await repository.save(video);
+
+    const response = await request(app.getHttpServer()).get(`/videos/${video.id}`);
+
+    expect(response.status).toBe(200);
+    expect(response.body.title).toBe('anytitle');
+    expect(response.body.url).toBe('anyurl');
+  })
+
+  test('/PUT/:id videos', async () => {
     const video = repository.create({
       title: 'anytitle',
       url: 'anyurl'
