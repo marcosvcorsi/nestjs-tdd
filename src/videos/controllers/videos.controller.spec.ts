@@ -11,7 +11,8 @@ describe('VideosController', () => {
       create: jest.fn(),
       findAll: jest.fn(),
       update: jest.fn(),
-      delete: jest.fn()
+      delete: jest.fn(),
+      findById: jest.fn()
     }
 
     const module: TestingModule = await Test.createTestingModule({
@@ -110,6 +111,16 @@ describe('VideosController', () => {
       const response = await controller.findAll();
 
       expect(response).toEqual(mockReturn)
+    })
+  })
+
+  describe('findById()', () => {
+    it('should call VideosService find by id with correct value', async () => {
+      const findSpy = jest.spyOn(service, 'findById');
+
+      await controller.findById('anyid');
+
+      expect(findSpy).toHaveBeenCalledWith('anyid');
     })
   })
 
