@@ -180,5 +180,11 @@ describe('VideosService', () => {
 
       expect(deleteSpy).toBeCalledWith('anyid');
     })
+
+    it('should throw if VideosRepository delete throws', async () => {
+      jest.spyOn(repository, 'delete').mockRejectedValueOnce(new Error());
+
+      await expect(service.delete('anyid')).rejects.toThrow(new Error())
+    })
   })
 });
