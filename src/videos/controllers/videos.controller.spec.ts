@@ -10,7 +10,8 @@ describe('VideosController', () => {
     const mockService = {
       create: jest.fn(),
       findAll: jest.fn(),
-      update: jest.fn()
+      update: jest.fn(),
+      delete: jest.fn()
     }
 
     const module: TestingModule = await Test.createTestingModule({
@@ -135,6 +136,16 @@ describe('VideosController', () => {
       }
 
       await expect(controller.update('anyid', mockParam)).rejects.toThrow(new Error())
+    })
+  })
+
+  describe('delete()', () => {
+    it('should call VideosService delete with correct value', async () => {
+      const deleteSpy = jest.spyOn(service, 'delete');
+
+      await controller.delete('anyid');
+
+      expect(deleteSpy).toHaveBeenCalledWith('anyid');
     })
   })
 });
