@@ -14,6 +14,11 @@ export class VideosController {
     return this.videosService.findAll();
   }
 
+  @Get(':id')
+  async findById(@Param('id') id: string): Promise<Video> {
+    return this.videosService.findById(id);
+  }
+  
   @Post()
   async create(@Body() createVideoDto: CreateVideoDto): Promise<Video> {
     return this.videosService.create(createVideoDto);
