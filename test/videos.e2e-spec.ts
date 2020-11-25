@@ -45,18 +45,6 @@ describe('Videos', () => {
     await app.close();
   })
 
-  test('/POST videos', async () => {
-    const response = await request(app.getHttpServer()).post('/videos').send({
-      title: 'anytitle',
-      url: 'anyurl'
-    });
-
-    expect(response.status).toBe(201);
-    expect(response.body.id).toBeTruthy();
-    expect(response.body.title).toBe('anytitle');
-    expect(response.body.url).toBe('anyurl')
-  })
-
   test('/GET videos', async () => {
     const video = repository.create({
       title: 'anytitle',
@@ -88,6 +76,18 @@ describe('Videos', () => {
     expect(response.body.url).toBe('anyurl');
   })
 
+  test('/POST videos', async () => {
+    const response = await request(app.getHttpServer()).post('/videos').send({
+      title: 'anytitle',
+      url: 'anyurl'
+    });
+
+    expect(response.status).toBe(201);
+    expect(response.body.id).toBeTruthy();
+    expect(response.body.title).toBe('anytitle');
+    expect(response.body.url).toBe('anyurl')
+  })
+
   test('/PUT/:id videos', async () => {
     const video = repository.create({
       title: 'anytitle',
@@ -106,5 +106,21 @@ describe('Videos', () => {
     expect(response.status).toBe(204);
     expect(updatedVideo.title).toBe('updatedtitle')
     expect(updatedVideo.url).toBe('updatedurl')
+  })
+
+  test('/DELETE/:id videos', async () => {
+    const video = repository.create({
+      title: 'anytitle',
+      url: 'anyurl'
+    })
+
+    await repository.save(video);
+
+    const response = await request(app.getHttpServer()).delete(`/videos/${video.id}`);
+
+    const videoDeleted = await repository.findOne(video.id);
+    
+    expect(response.status).toBe(204);
+    expect(videoDeleted).toBeFalsy()
   })
 })
