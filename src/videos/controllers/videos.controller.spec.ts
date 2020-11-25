@@ -1,4 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
+import { Video } from '../entities/video.entity';
 import { VideosService } from '../services/videos.service';
 import { VideosController } from './videos.controller';
 
@@ -127,6 +128,22 @@ describe('VideosController', () => {
       jest.spyOn(service, 'findById').mockRejectedValueOnce(new Error());
 
       await expect(controller.findById('anyid')).rejects.toThrow(new Error());
+    })
+
+    it('should return a video on success', async () => {
+      const mockReturn: Video = {
+        id: 'anyid',
+        title: 'anytitle',
+        url: 'anyurl',
+        created_at: new Date(),
+        updated_at: new Date()
+      }
+
+      jest.spyOn(service, 'findById').mockResolvedValueOnce(mockReturn);
+
+      const response = await controller.findById('anyid');
+
+      expect(response).toEqual(mockReturn);
     })
   })
 
