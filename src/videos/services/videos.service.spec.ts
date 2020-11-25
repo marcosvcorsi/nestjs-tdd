@@ -11,7 +11,8 @@ describe('VideosService', () => {
       create: jest.fn(),
       findAll: jest.fn(),
       update: jest.fn(),
-      findById: jest.fn()
+      findById: jest.fn(),
+      delete: jest.fn()
     }
 
     const module: TestingModule = await Test.createTestingModule({
@@ -168,6 +169,16 @@ describe('VideosService', () => {
       }
 
       await expect(service.update('anyid', mockParam)).rejects.toThrow(new Error());
+    })
+  })
+
+  describe('delete()', () => {
+    it('should call VideosRepository delete with correct value', async () => {
+      const deleteSpy = jest.spyOn(repository, 'delete');
+
+      await service.delete('anyid');
+
+      expect(deleteSpy).toBeCalledWith('anyid');
     })
   })
 });
