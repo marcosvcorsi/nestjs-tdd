@@ -24,4 +24,8 @@ export class VideosService {
   async update(id: string, updateVideoDto: UpdateVideoDto): Promise<void> {
     return this.videosRepository.update(id, updateVideoDto);
   }
+
+  async delete(id: string): Promise<void> {
+    return this.videosRepository.delete(id);
+  }
 }
