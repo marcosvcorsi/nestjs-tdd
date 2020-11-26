@@ -1,4 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
+import { mockCreateVideoDto, mockUpdateVideoDto, mockVideo } from '../../test/video';
 import { VideosRepository } from '../repositories/videos.repository';
 import { VideosService } from './videos.service';
 
@@ -37,10 +38,7 @@ describe('VideosService', () => {
     it('should call VideosRepository create with correct values', async () => {
       const createSpy = jest.spyOn(repository, 'create');
 
-      const mockParam = {
-        title: 'anytitle',
-        url: 'anyurl'
-      }
+      const mockParam = mockCreateVideoDto();
 
       await service.create(mockParam);
 
@@ -50,31 +48,15 @@ describe('VideosService', () => {
     it('should throw if VideosRepository create throws', async () => {
       jest.spyOn(repository, 'create').mockRejectedValueOnce(new Error());
 
-      const mockParam = {
-        title: 'anytitle',
-        url: 'anyurl'
-      }
-
-      await expect(service.create(mockParam)).rejects.toThrow(new Error());
+      await expect(service.create(mockCreateVideoDto())).rejects.toThrow(new Error());
     })
 
     it('should return a video on success', async () => {
-      const mockReturn = {
-        id: 'anyid',
-        title: 'anytitle',
-        url: 'anyurl',
-        created_at: new Date(),
-        updated_at: new Date()
-      }
+      const mockReturn = mockVideo();
 
       jest.spyOn(repository, 'create').mockResolvedValueOnce(mockReturn);
 
-      const mockParam = {
-        title: 'anytitle',
-        url: 'anyurl'
-      }
-
-      const response = await service.create(mockParam);
+      const response = await service.create(mockCreateVideoDto());
 
       expect(response).toEqual(mockReturn);
     })
@@ -96,15 +78,7 @@ describe('VideosService', () => {
     })
 
     it('should return videos on success', async () => {
-      const mockReturn = [
-        {
-          id: 'anyid',
-          title: 'anytitle',
-          url: 'anyurl',
-          created_at: new Date(),
-          updated_at: new Date()
-        }
-      ]
+      const mockReturn = [mockVideo()]
 
       jest.spyOn(repository, 'findAll').mockResolvedValueOnce(mockReturn);
 
@@ -130,13 +104,7 @@ describe('VideosService', () => {
     })
 
     it('should return a video on success', async () => {
-      const mockReturn = {
-        id: 'anyid',
-        title: 'anytitle',
-        url: 'anyurl',
-        created_at: new Date(),
-        updated_at: new Date()
-      }
+      const mockReturn = mockVideo();
 
       jest.spyOn(repository, 'findById').mockResolvedValueOnce(mockReturn)
 
@@ -150,10 +118,7 @@ describe('VideosService', () => {
     it('should call VideosRepository update with correct values', async () => {
       const updateSpy = jest.spyOn(repository, 'update');
       
-      const mockParam = {
-        title: 'anytitle',
-        url: 'anyurl'
-      }
+      const mockParam = mockUpdateVideoDto();
 
       await service.update('anyid', mockParam);
 
@@ -163,12 +128,7 @@ describe('VideosService', () => {
     it('should throw if VideosRepository throws', async () => {
       jest.spyOn(repository, 'update').mockRejectedValueOnce(new Error());
 
-      const mockParam = {
-        title: 'anytitle',
-        url: 'anyurl'
-      }
-
-      await expect(service.update('anyid', mockParam)).rejects.toThrow(new Error());
+      await expect(service.update('anyid', mockUpdateVideoDto())).rejects.toThrow(new Error());
     })
   })
 

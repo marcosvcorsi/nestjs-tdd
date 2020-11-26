@@ -1,5 +1,6 @@
 import { Test } from "@nestjs/testing";
 import { getRepositoryToken } from "@nestjs/typeorm";
+import { mockUpdateVideoDto, mockVideo } from "../../test/video";
 import { Repository } from "typeorm";
 import { Video } from "../entities/video.entity";
 import { VideosRepository } from "./videos.repository"
@@ -34,13 +35,7 @@ describe('Videos Repository', () => {
 
   describe('create()', () => {
     it('should create a new video', async () => {
-      jest.spyOn(ormMock, 'create').mockReturnValueOnce({
-        id: 'anyid',
-        title: 'anytitle',
-        url: 'anyurl',
-        created_at: new Date(),
-        updated_at: new Date(),
-      })
+      jest.spyOn(ormMock, 'create').mockReturnValueOnce(mockVideo())
 
       const response = await repository.create({
         title: 'anytitle',
@@ -55,13 +50,7 @@ describe('Videos Repository', () => {
 
   describe('findAll()', () => {
     it('should return all videos', async () => {
-      const mockReturn = [{
-        id: 'anyid',
-        title: 'anytitle',
-        url: 'anyurl',
-        created_at: new Date(),
-        updated_at: new Date(),
-      }]
+      const mockReturn = [mockVideo()]
 
       jest.spyOn(ormMock, 'find').mockResolvedValueOnce(mockReturn);
 
@@ -73,13 +62,7 @@ describe('Videos Repository', () => {
 
   describe('findById()', () => {
     it('should return a video', async () => {
-      const mockReturn = {
-        id: 'anyid',
-        title: 'anytitle',
-        url: 'anyurl',
-        created_at: new Date(),
-        updated_at: new Date(),
-      }
+      const mockReturn = mockVideo();
 
       jest.spyOn(ormMock, 'findOne').mockResolvedValueOnce(mockReturn);
 
@@ -91,10 +74,7 @@ describe('Videos Repository', () => {
 
   describe('update()', () => {
     it('should call OrmRepository update with correct values', async () => {
-      const mockParam = {
-        title: 'anytitle',
-        url: 'anyurl'
-      }
+      const mockParam = mockUpdateVideoDto()
       
       const updateSpy = jest.spyOn(ormMock, 'update');
 
