@@ -21,7 +21,7 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "test:staged": "jest --findRelatedTests",
-    "test:ci": "yarn test && yarn test:e2e"
+    "test:ci": "yarn test:cov && yarn test:e2e"
   },
   "dependencies": {
     "@nestjs/common": "^7.0.0",
