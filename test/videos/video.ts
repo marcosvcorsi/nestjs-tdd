@@ -1,6 +1,6 @@
 import { CreateVideoDto } from "src/videos/dtos/create-video.dto";
 import { UpdateVideoDto } from "src/videos/dtos/update-video.dto";
-import { Video } from "../videos/entities/video.entity";
+import { Video } from "../../src/videos/entities/video.entity";
 
 export const mockUpdateVideoDto = (): UpdateVideoDto => ({
   title: 'anytitle',

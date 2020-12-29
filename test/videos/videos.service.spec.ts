@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { mockCreateVideoDto, mockUpdateVideoDto, mockVideo } from '../../test/video';
-import { VideosRepository } from '../repositories/videos.repository';
-import { VideosService } from './videos.service';
+import { VideosRepository } from '../../src/videos/repositories/videos.repository';
+import { VideosService } from '../../src/videos/services/videos.service';
+import { mockCreateVideoDto, mockUpdateVideoDto, mockVideo } from './video';
 
 describe('VideosService', () => {
   let service: VideosService;

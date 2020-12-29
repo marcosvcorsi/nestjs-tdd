@@ -1,9 +1,9 @@
 import { Test } from "@nestjs/testing";
 import { getRepositoryToken } from "@nestjs/typeorm";
-import { mockUpdateVideoDto, mockVideo } from "../../test/video";
+import { mockUpdateVideoDto, mockVideo } from "./video";
 import { Repository } from "typeorm";
-import { Video } from "../entities/video.entity";
-import { VideosRepository } from "./videos.repository"
+import { Video } from "../../src/videos/entities/video.entity";
+import { VideosRepository } from "../../src/videos/repositories/videos.repository";
 
 describe('Videos Repository', () => {
   let repository: VideosRepository;
