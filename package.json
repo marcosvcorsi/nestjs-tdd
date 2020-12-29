@@ -20,7 +20,8 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "test:staged": "jest --findRelatedTests"
+    "test:staged": "jest --findRelatedTests",
+    "test:ci": "npm run test && npm run test:e2e"
   },
   "dependencies": {
     "@nestjs/common": "^7.0.0",
@@ -68,8 +69,8 @@
       "json",
       "ts"
     ],
-    "rootDir": "src",
-    "testRegex": ".spec.ts$",
+    "rootDir": "test",
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.[jt]sx?$",
     "transform": {
       "^.+\\.(t|j)s$": "ts-jest"
     },
