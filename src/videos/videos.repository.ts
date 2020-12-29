@@ -1,9 +1,9 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
-import { CreateVideoDto } from "../dtos/create-video.dto";
-import { UpdateVideoDto } from "../dtos/update-video.dto";
-import { Video } from "../entities/video.entity";
+import { CreateVideoDto } from "./dtos/create-video.dto";
+import { UpdateVideoDto } from "./dtos/update-video.dto";
+import { Video } from "./entities/video.entity";
 
 @Injectable()
 export class VideosRepository {

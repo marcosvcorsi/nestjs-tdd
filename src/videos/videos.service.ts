@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { CreateVideoDto } from '../dtos/create-video.dto';
-import { UpdateVideoDto } from '../dtos/update-video.dto';
-import { Video } from '../entities/video.entity';
-import { VideosRepository } from '../repositories/videos.repository';
+import { CreateVideoDto } from './dtos/create-video.dto';
+import { UpdateVideoDto } from './dtos/update-video.dto';
+import { Video } from './entities/video.entity';
+import { VideosRepository } from './videos.repository';
 
 @Injectable()
 export class VideosService {

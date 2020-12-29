@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { VideosRepository } from '../../src/videos/repositories/videos.repository';
-import { VideosService } from '../../src/videos/services/videos.service';
+import { VideosRepository } from '../../src/videos/videos.repository';
+import { VideosService } from '../../src/videos/videos.service';
 import { mockCreateVideoDto, mockUpdateVideoDto, mockVideo } from './video';
 
 describe('VideosService', () => {

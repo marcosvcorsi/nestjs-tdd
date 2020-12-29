@@ -1,8 +1,8 @@
 import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Post, Put } from '@nestjs/common';
-import { CreateVideoDto } from '../dtos/create-video.dto';
-import { UpdateVideoDto } from '../dtos/update-video.dto';
-import { Video } from '../entities/video.entity';
-import { VideosService } from '../services/videos.service';
+import { CreateVideoDto } from './dtos/create-video.dto';
+import { UpdateVideoDto } from './dtos/update-video.dto';
+import { Video } from './entities/video.entity';
+import { VideosService } from './videos.service';
 
 @Controller('videos')
 export class VideosController {

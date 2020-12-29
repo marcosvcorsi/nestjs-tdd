@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { mockCreateVideoDto, mockUpdateVideoDto, mockVideo } from './video';
-import { VideosService } from '../../src/videos/services/videos.service';
-import { VideosController } from '../../src/videos/controllers/videos.controller';
+import { VideosService } from '../../src/videos/videos.service';
+import { VideosController } from '../../src/videos/videos.controller';
 
 describe('VideosController', () => {
   let controller: VideosController;

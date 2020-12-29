@@ -3,7 +3,7 @@ import { getRepositoryToken } from "@nestjs/typeorm";
 import { mockUpdateVideoDto, mockVideo } from "./video";
 import { Repository } from "typeorm";
 import { Video } from "../../src/videos/entities/video.entity";
-import { VideosRepository } from "../../src/videos/repositories/videos.repository";
+import { VideosRepository } from "../../src/videos/videos.repository";
 
 describe('Videos Repository', () => {
   let repository: VideosRepository;
