@@ -71,12 +71,12 @@
       "json",
       "ts"
     ],
-    "rootDir": "test",
-    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.[jt]sx?$",
+    "rootDir": ".",
+    "testRegex": "(/tests/.*|(\\.|/)(test|spec))\\.[jt]sx?$",
     "transform": {
       "^.+\\.(t|j)s$": "ts-jest"
     },
-    "coverageDirectory": "../coverage",
+    "coverageDirectory": "./coverage",
     "testEnvironment": "node"
   }
 }
