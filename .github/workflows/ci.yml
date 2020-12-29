@@ -35,9 +35,15 @@ jobs:
       - name: Install dependencies
         run: yarn
 
-      # executar build
+      - run: docker-compose up -d postgres
+        name: Start infrastructure  
+
+      # executar tests
       - name: Run Tests
-        run: yarn test:cov
+        run: yarn test:ci
+
+      - run: docker-compose down
+        name: Dispose infrastructure  
 
       # coveralls
       - name: Coveralls
