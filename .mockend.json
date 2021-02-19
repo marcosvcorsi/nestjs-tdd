@@ -1,9 +1,0 @@
-{
-  "Video": {
-    "id": "string",
-    "title": "string",
-    "url": "string",
-    "created_at": "date",
-    "updated_at": "date"
-  }
-}
